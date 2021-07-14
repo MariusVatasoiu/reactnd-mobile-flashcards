@@ -1,27 +1,38 @@
 import React, { Component } from "react";
-import { Button, FlatList, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  FlatList,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { connect } from "react-redux";
 import { white } from "../utils/colors";
 
 class HomeScreen extends Component {
+  onPress = () => {
+    console.log("go to deck");
+  };
+
   renderItem = ({ item }) => (
-    <Text>{item.title}</Text>
+    <TouchableOpacity
+      style={{ textAlign: "center", marginBottom: 20 }}
+      onPress={this.onPress}
+    >
+      <Text>{item.title}</Text>
+      <Text>{item.cards.length} cards</Text>
+    </TouchableOpacity>
   );
 
   render() {
     const { decks } = this.props;
     return (
       <View style={styles.container}>
-        <Text>Home Screens</Text>
         <FlatList
           data={decks}
           renderItem={this.renderItem}
           keyExtractor={(item) => item.id}
-        />
-        {/* {decks.map((deck) => <Text key={deck.id}>{deck.title} {deck.id}</Text>)} */}
-        <Button
-          title="Deck 1"
-          onPress={() => this.props.navigation.navigate("Deck")}
         />
       </View>
     );
