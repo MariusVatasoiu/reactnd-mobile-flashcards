@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
+import middleware from "./middleware";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -61,7 +62,7 @@ export default class App extends Component {
   }
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={createStore(reducer, middleware)}>
         <View style={{ flex: 1 }}>
           <AppContainer />
         </View>

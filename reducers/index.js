@@ -1,20 +1,20 @@
-import { RECEIVE_ENTRIES, ADD_ENTRY } from '../actions'
+import { ADD_DECK, RECEIVE_DECKS } from "../actions";
 
-function entries (state = {}, action) {
+function decks(state = {}, action) {
   switch (action.type) {
-    case RECEIVE_ENTRIES :
+    case RECEIVE_DECKS:
       return {
         ...state,
         ...action.entries,
-      }
-    case ADD_ENTRY :
+      };
+    case ADD_DECK:
       return {
         ...state,
-        ...action.entry
-      }
-    default :
-      return state
+        [action.deck.id]: action.deck,
+      };
+    default:
+      return state;
   }
 }
 
-export default entries
+export default decks;

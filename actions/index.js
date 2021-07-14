@@ -1,16 +1,23 @@
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
-export const ADD_ENTRY = 'ADD_ENTRY'
+import { generateUID } from "../utils/helpers";
 
-export function receiveEntries (entries) {
+export const RECEIVE_DECKS = "RECEIVE_DECKS";
+export const ADD_DECK = "ADD_DECK";
+
+export function receiveDecks(decks) {
   return {
-    type: RECEIVE_ENTRIES,
-    entries,
-  }
+    type: RECEIVE_DECKS,
+    decks,
+  };
 }
 
-export function addEntry (entry) {
+export function addDeck(text) {
+  const deck = {
+    id: generateUID(),
+    title: text,
+    cards: [],
+  };
   return {
-    type: ADD_ENTRY,
-    entry,
-  }
+    type: ADD_DECK,
+    deck,
+  };
 }
