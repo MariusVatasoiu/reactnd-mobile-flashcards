@@ -1,5 +1,4 @@
 import { AsyncStorage as Storage } from "react-native";
-import * as Permissions from "expo-permissions";
 import * as Notifications from "expo-notifications";
 
 const NOTIFICATION_KEY = "Flashcards:notifications";
@@ -50,7 +49,7 @@ export function setLocalNotification() {
     .then(JSON.parse)
     .then((data) => {
       if (data === null) {
-        Permissions.askAsync(Permissions.NOTIFICATIONS)
+        Notifications.requestPermissionsAsync()
           .then(({ status }) => {
             if (status === "granted") {
               Notifications.cancelAllScheduledNotificationsAsync();
@@ -65,8 +64,9 @@ export function setLocalNotification() {
                   title: "Start a quiz!",
                 },
                 trigger: {
-                  time: tomorrow,
-                  repeat: "day",
+                  type: "daily",
+                  hour: 23,
+                  minute: 0,
                 },
               });
 
