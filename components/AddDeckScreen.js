@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
+import { generateUID } from "../utils/helpers";
 
 class AddDeckScreen extends Component {
   state = {
@@ -14,14 +15,18 @@ class AddDeckScreen extends Component {
 
   onSubmit = () => {
     const { text } = this.state;
-    const { dispatch } = this.props;
+    const { dispatch, navigation } = this.props;
 
     if (text === "") {
       return;
     }
-    dispatch(addDeck(text));
+
+    const id = generateUID();
+    dispatch(addDeck(id, text));
 
     this.setState({ text: "" });
+
+    navigation.navigate("Deck", { id });
   };
 
   render() {

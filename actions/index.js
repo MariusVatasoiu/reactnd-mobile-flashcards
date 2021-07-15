@@ -12,9 +12,9 @@ export function receiveDecks(decks) {
   };
 }
 
-export function addDeck(text) {
+export function addDeck(id, text) {
   const deck = {
-    id: generateUID(),
+    id,
     title: text,
     cards: {},
   };
