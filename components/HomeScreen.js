@@ -8,9 +8,13 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
+import { handleInitialData } from "../actions";
 import { white } from "../utils/colors";
 
 class HomeScreen extends Component {
+  componentDidMount() {
+    this.props.dispatch(handleInitialData());
+  }
   onPress = (id) => {
     console.log("go to deck");
     this.props.navigation.navigate("Deck", { id });

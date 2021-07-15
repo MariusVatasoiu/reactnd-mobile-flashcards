@@ -1,11 +1,27 @@
 import React, { Component } from "react";
 import { Button, Text, View } from "react-native";
 import { connect } from "react-redux";
+import { deleteDeck } from "../actions";
 
 class DeckScreen extends Component {
+  state = { deleted: false };
+
+  deleteDeck = (id) => {
+    const { dispatch, navigation } = this.props;
+    dispatch(deleteDeck(id));
+    this.setState({ deleted: true });
+
+    navigation.navigate("Home");
+  };
+
   render() {
+    const { deleted } = this.state;
     const { deck } = this.props;
-    console.log(deck);
+
+    if (deleted) {
+      return <View></View>;
+    }
+
     return (
       <View>
         <Text>{deck.title}</Text>
@@ -20,6 +36,10 @@ class DeckScreen extends Component {
           title="Start Quiz"
           onPress={() =>
             this.props.navigation.navigate("Quiz", { id: deck.id })}
+        />
+        <Button
+          title="Delete Deck"
+          onPress={() => this.deleteDeck(deck.id)}
         />
       </View>
     );

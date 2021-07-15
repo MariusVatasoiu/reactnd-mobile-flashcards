@@ -1,17 +1,21 @@
-import { ADD_CARD, ADD_DECK, RECEIVE_DECKS } from "../actions";
+import { ADD_CARD, ADD_DECK, DELETE_DECK, RECEIVE_DECKS } from "../actions";
 
 function decks(state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
         ...state,
-        ...action.entries,
+        ...action.decks,
       };
     case ADD_DECK:
       return {
         ...state,
         [action.deck.id]: action.deck,
       };
+    case DELETE_DECK:
+      const newState = { ...state };
+      delete newState[action.id];
+      return newState;
     case ADD_CARD:
       return {
         ...state,
