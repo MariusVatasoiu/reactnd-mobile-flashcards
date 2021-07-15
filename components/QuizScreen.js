@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { addQuiz } from "../actions/quizzes";
+import { handleAddQuiz } from "../actions/quizzes";
 
 class QuizScreen extends Component {
   state = {
@@ -36,7 +36,7 @@ class QuizScreen extends Component {
       });
 
       // Save the quiz to store
-      dispatch(addQuiz(deckId));
+      dispatch(handleAddQuiz(deckId));
     }
   };
 

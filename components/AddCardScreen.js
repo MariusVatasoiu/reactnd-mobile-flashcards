@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
-import { addCard } from "../actions/decks";
+import { handleAddCard } from "../actions/decks";
 
 class AddCardScreen extends Component {
   state = {
@@ -19,11 +19,12 @@ class AddCardScreen extends Component {
     const deckId = navigation.getParam("id");
 
     console.log("Add", question, answer);
-    dispatch(addCard(deckId, question, answer));
+    dispatch(
+      handleAddCard(deckId, question, answer, () =>
+        navigation.navigate("Deck", { id: deckId })),
+    );
 
     this.setState({ question: "", answer: "" });
-
-    navigation.navigate("Deck", { id: deckId });
   };
 
   render() {

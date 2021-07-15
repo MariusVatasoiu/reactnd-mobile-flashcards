@@ -1,23 +1,21 @@
 import React, { Component } from "react";
 import { Button, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { deleteDeck } from "../actions/decks";
+import { handleDeleteDeck } from "../actions/decks";
 
 class DeckScreen extends Component {
   state = { deleted: false };
 
   deleteDeck = (id) => {
     const { dispatch, navigation } = this.props;
-    dispatch(deleteDeck(id));
+    dispatch(handleDeleteDeck(id, () => navigation.navigate("Home")));
     this.setState({ deleted: true });
-
-    navigation.navigate("Home");
   };
 
   render() {
     const { deleted } = this.state;
     const { deck } = this.props;
-
+    console.log(deck);
     if (deleted) {
       return <View></View>;
     }
@@ -47,6 +45,7 @@ class DeckScreen extends Component {
 }
 
 function mapStateToProps({ decks }, { navigation }) {
+  console.log(decks);
   return {
     deck: decks[navigation.getParam("id")],
   };

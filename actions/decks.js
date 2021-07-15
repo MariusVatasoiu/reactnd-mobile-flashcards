@@ -1,4 +1,5 @@
 import { generateUID } from "../utils/helpers";
+import { deleteDeckAPI, saveCardAPI, saveDeckAPI } from "../utils/api";
 
 export const RECEIVE_DECKS = "RECEIVE_DECKS";
 export const ADD_DECK = "ADD_DECK";
@@ -12,15 +13,25 @@ export function receiveDecks(decks) {
   };
 }
 
-export function addDeck(id, text) {
-  const deck = {
-    id,
-    title: text,
-    cards: {},
-  };
+export function addDeck(deck) {
   return {
     type: ADD_DECK,
     deck,
+  };
+}
+
+export function handleAddDeck(id, text, navigate) {
+  return (dispatch) => {
+    const deck = {
+      id,
+      title: text,
+      cards: {},
+    };
+
+    return saveDeckAPI(deck).then((deck) => {
+      dispatch(addDeck(deck));
+      navigate();
+    });
   };
 }
 
@@ -31,59 +42,34 @@ export function deleteDeck(id) {
   };
 }
 
-export function addCard(deckId, question, answer) {
-  const card = {
-    id: generateUID(),
-    deckId,
-    question,
-    answer,
+export function handleDeleteDeck(id, navigate) {
+  return (dispatch) => {
+    return deleteDeckAPI(id).then(() => {
+      dispatch(deleteDeck(id));
+      navigate();
+    });
   };
+}
+
+export function addCard(card) {
   return {
     type: ADD_CARD,
     card,
   };
 }
 
-export function handleInitialData() {
-  const decks = {
-    "nszil549i4pgzyva6lf7": {
-      "id": "nszil549i4pgzyva6lf7",
-      "title": "sdfasdfas",
-      "cards": {
-        "o0ysosv7nfc3bc8g5xz9o9": {
-          "id": "o0ysosv7nfc3bc8g5xz9o9",
-          "deckId": "nszil549i4pgzyva6lf7",
-          "question": "sdfasdfaf",
-          "answer": "dfdfgsdfgsdfg",
-        },
-        "vnruwtyhb1p6ryfcpdsd": {
-          "id": "vnruwtyhb1p6ryfcpdsd",
-          "deckId": "nszil549i4pgzyva6lf7",
-          "question": "dddddd",
-          "answer": "ssssss",
-        },
-      },
-    },
-    "4qfcmdhc1aj0hp0qrjm2": {
-      "id": "4qfcmdhc1aj0hp0qrjm2",
-      "title": "Deck 2",
-      "cards": {
-        "2prm1tx5ir691mi530nudg": {
-          "id": "2prm1tx5ir691mi530nudg",
-          "deckId": "4qfcmdhc1aj0hp0qrjm2",
-          "question": "Question 1",
-          "answer": "Answer 1",
-        },
-        "hh2sz7kd4j643p3x3qpjwp": {
-          "id": "hh2sz7kd4j643p3x3qpjwp",
-          "deckId": "4qfcmdhc1aj0hp0qrjm2",
-          "question": "Question 2",
-          "answer": "Answer 2",
-        },
-      },
-    },
-  };
+export function handleAddCard(deckId, question, answer, navigate) {
   return (dispatch) => {
-    return Promise.resolve().then(() => dispatch(receiveDecks(decks)));
+    const card = {
+      id: generateUID(),
+      deckId,
+      question,
+      answer,
+    };
+
+    return saveCardAPI(card).then(() => {
+      dispatch(addCard(card));
+      navigate();
+    });
   };
 }

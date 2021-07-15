@@ -7,7 +7,6 @@ import middleware from "./middleware";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { purple, white } from "./utils/colors";
 import { setLocalNotification } from "./utils/helpers";
 import HomeScreen from "./components/HomeScreen";
 import DeckScreen from "./components/DeckScreen";
@@ -64,6 +63,7 @@ export default class App extends Component {
   componentDidMount() {
     setLocalNotification();
   }
+
   render() {
     return (
       <Provider store={createStore(reducer, middleware)}>

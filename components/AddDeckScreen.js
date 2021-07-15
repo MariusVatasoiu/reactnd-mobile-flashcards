@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
-import { addDeck } from "../actions/decks";
+import { handleAddDeck } from "../actions/decks";
 import { generateUID } from "../utils/helpers";
 
 class AddDeckScreen extends Component {
@@ -22,11 +22,11 @@ class AddDeckScreen extends Component {
     }
 
     const id = generateUID();
-    dispatch(addDeck(id, text));
+    dispatch(
+      handleAddDeck(id, text, () => navigation.navigate("Deck", { id })),
+    );
 
     this.setState({ text: "" });
-
-    navigation.navigate("Deck", { id });
   };
 
   render() {

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  Button,
   FlatList,
   StyleSheet,
   Text,
@@ -8,7 +7,7 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
-import { handleInitialData } from "../actions/decks";
+import { handleInitialData } from "../actions/shared";
 import { white } from "../utils/colors";
 
 class HomeScreen extends Component {
