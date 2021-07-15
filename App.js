@@ -26,7 +26,12 @@ const HomeStack = createStackNavigator({
       title: "Decks",
     }),
   },
-  Deck: DeckScreen,
+  Deck: {
+    screen: DeckScreen,
+    navigationOptions: () => ({
+      title: "Deck",
+    }),
+  },
   AddCard: AddCardScreen,
   Quiz: QuizScreen,
 });
