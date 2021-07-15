@@ -6,3 +6,5 @@ This project let's users to create decks with cards. A card has a question and a
 
 - install all project dependencies with `npm install`
 - start the development server with `npm run ios` or `npm run android`
+
+The app was tested on `Android` device using `Expo Go` app.
