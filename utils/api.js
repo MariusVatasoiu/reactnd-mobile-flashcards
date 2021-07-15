@@ -1,7 +1,7 @@
 import { AsyncStorage as Storage } from "react-native";
 
 // ONLY FOR WEB TESTING
-Storage = localStorage;
+// Storage = localStorage;
 
 export async function getStoreAPI() {
   try {

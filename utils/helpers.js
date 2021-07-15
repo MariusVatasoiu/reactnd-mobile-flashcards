@@ -5,7 +5,7 @@ import * as Notifications from "expo-notifications";
 const NOTIFICATION_KEY = "Flashcards:notifications";
 
 // ONLY FOR WEB TESTING
-Storage = localStorage;
+// Storage = localStorage;
 
 export function generateUID() {
   return Math.random().toString(36).substring(2, 15) +
@@ -60,17 +60,19 @@ export function setLocalNotification() {
               tomorrow.setHours(20);
               tomorrow.setMinutes(0);
 
-              Notifications.scheduleNotificationAsync(
-                createNotification(),
-                {
+              Notifications.scheduleNotificationAsync({
+                content: {
+                  title: "Start a quiz!",
+                },
+                trigger: {
                   time: tomorrow,
                   repeat: "day",
                 },
-              );
+              });
 
               Storage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
             }
-          });
+          }).catch((error) => console.warn(error));
       }
     });
 }
