@@ -64,9 +64,7 @@ export function setLocalNotification() {
                   title: "Start a quiz!",
                 },
                 trigger: {
-                  type: "daily",
-                  hour: 23,
-                  minute: 0,
+                  seconds: 60 * 60 * 24,
                 },
               });
 
