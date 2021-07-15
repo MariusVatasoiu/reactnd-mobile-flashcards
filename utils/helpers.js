@@ -1,7 +1,11 @@
-import { AsyncStorage } from "react-native";
-import { Notifications, Permissions } from "expo";
+import { AsyncStorage as Storage } from "react-native";
+import * as Permissions from "expo-permissions";
+import * as Notifications from "expo-notifications";
 
 const NOTIFICATION_KEY = "Flashcards:notifications";
+
+// ONLY FOR WEB TESTING
+Storage = localStorage;
 
 export function generateUID() {
   return Math.random().toString(36).substring(2, 15) +
@@ -17,7 +21,11 @@ export function timeToString(time = Date.now()) {
 }
 
 export function clearLocalNotification() {
-  return AsyncStorage.removeItem(NOTIFICATION_KEY)
+  // ONLY FOR WEB
+  // Storage.removeItem(NOTIFICATION_KEY);
+  // return Notifications.cancelAllScheduledNotificationsAsync();
+
+  return Promise.resolve(Storage.removeItem(NOTIFICATION_KEY))
     .then(Notifications.cancelAllScheduledNotificationsAsync);
 }
 
@@ -38,7 +46,7 @@ function createNotification() {
 }
 
 export function setLocalNotification() {
-  AsyncStorage.getItem(NOTIFICATION_KEY)
+  Promise.resolve(Storage.getItem(NOTIFICATION_KEY))
     .then(JSON.parse)
     .then((data) => {
       if (data === null) {
@@ -52,7 +60,7 @@ export function setLocalNotification() {
               tomorrow.setHours(20);
               tomorrow.setMinutes(0);
 
-              Notifications.scheduleLocalNotificationAsync(
+              Notifications.scheduleNotificationAsync(
                 createNotification(),
                 {
                   time: tomorrow,
@@ -60,7 +68,7 @@ export function setLocalNotification() {
                 },
               );
 
-              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
+              Storage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
             }
           });
       }

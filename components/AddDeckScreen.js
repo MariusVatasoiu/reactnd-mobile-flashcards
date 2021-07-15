@@ -3,6 +3,7 @@ import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
 import { handleAddDeck } from "../actions/decks";
 import { generateUID } from "../utils/helpers";
+import { white } from "../utils/colors";
 
 class AddDeckScreen extends Component {
   state = {
@@ -32,11 +33,21 @@ class AddDeckScreen extends Component {
   render() {
     const { text } = this.state;
     return (
-      <View>
-        <Text>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text
+          style={{
+            fontSize: 18,
+            paddingBottom: 20,
+            paddingTop: 40,
+            textAlign: "center",
+          }}
+        >
+          What is the title of your new deck?
+        </Text>
         <TextInput
           style={styles.input}
           onChangeText={this.onChangeText}
+          placeholder="Title"
           value={text}
         />
         <Button
@@ -49,9 +60,15 @@ class AddDeckScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: white,
+  },
   input: {
     border: "1px solid black",
     padding: 5,
+    marginBottom: 20,
   },
 });
 

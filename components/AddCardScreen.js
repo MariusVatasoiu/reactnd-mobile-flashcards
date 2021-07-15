@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
 import { handleAddCard } from "../actions/decks";
+import { white } from "../utils/colors";
 
 class AddCardScreen extends Component {
   state = {
@@ -20,8 +21,12 @@ class AddCardScreen extends Component {
 
     console.log("Add", question, answer);
     dispatch(
-      handleAddCard(deckId, question, answer, () =>
-        navigation.navigate("Deck", { id: deckId })),
+      handleAddCard(
+        deckId,
+        question,
+        answer,
+        () => navigation.navigate("Deck", { id: deckId }),
+      ),
     );
 
     this.setState({ question: "", answer: "" });
@@ -31,16 +36,17 @@ class AddCardScreen extends Component {
     const { question, answer } = this.state;
 
     return (
-      <View>
-        <Text>Add Card Screen</Text>
+      <View style={styles.container}>
         <TextInput
           style={styles.input}
           onChangeText={(e) => this.onChangeText(e, "question")}
+          placeholder="Question"
           value={question}
         />
         <TextInput
           style={styles.input}
           onChangeText={(e) => this.onChangeText(e, "answer")}
+          placeholder="Answer"
           value={answer}
         />
         <Button
@@ -53,9 +59,15 @@ class AddCardScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: white,
+  },
   input: {
     border: "1px solid black",
     padding: 5,
+    marginBottom: 20,
   },
 });
 

@@ -24,7 +24,7 @@ class HomeScreen extends Component {
       style={{ textAlign: "center", marginBottom: 20 }}
       onPress={() => this.onPress(item.id)}
     >
-      <Text>{item.title}</Text>
+      <Text style={{ fontSize: 24 }}>{item.title}</Text>
       <Text>{Object.keys(item.cards).length} cards</Text>
     </TouchableOpacity>
   );
