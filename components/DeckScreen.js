@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Text, View } from "react-native";
 import { connect } from "react-redux";
-import { deleteDeck } from "../actions";
+import { deleteDeck } from "../actions/decks";
 
 class DeckScreen extends Component {
   state = { deleted: false };
@@ -46,9 +46,9 @@ class DeckScreen extends Component {
   }
 }
 
-function mapStateToProps(state, { navigation }) {
+function mapStateToProps({ decks }, { navigation }) {
   return {
-    deck: state[navigation.getParam("id")],
+    deck: decks[navigation.getParam("id")],
   };
 }
 export default connect(mapStateToProps)(DeckScreen);

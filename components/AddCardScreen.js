@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
-import { addCard } from "../actions";
+import { addCard } from "../actions/decks";
 
 class AddCardScreen extends Component {
   state = {

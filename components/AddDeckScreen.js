@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import { connect } from "react-redux";
-import { addDeck } from "../actions";
+import { addDeck } from "../actions/decks";
 import { generateUID } from "../utils/helpers";
 
 class AddDeckScreen extends Component {

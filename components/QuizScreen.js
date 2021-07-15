@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
+import { addQuiz } from "../actions/quizzes";
 
 class QuizScreen extends Component {
   state = {
@@ -14,12 +15,12 @@ class QuizScreen extends Component {
   };
 
   answer = (answer, index) => {
+    const { deckId, dispatch } = this.props;
     if (answer === "correct") {
       this.setState((state) => ({
         score: state.score + 1,
       }));
     }
-    console.log(this.props.cards[index + 1]);
 
     // Show next card
     if (index < this.props.cards.length - 1) {
@@ -34,7 +35,8 @@ class QuizScreen extends Component {
         finished: true,
       });
 
-      // Save the quiz to AsyncStorage
+      // Save the quiz to store
+      dispatch(addQuiz(deckId));
     }
   };
 
@@ -115,11 +117,11 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state, { navigation }) {
+function mapStateToProps({ decks }, { navigation }) {
   const deckId = navigation.getParam("id");
   return {
     deckId,
-    cards: Object.values(state[deckId].cards),
+    cards: Object.values(decks[deckId].cards),
   };
 }
 

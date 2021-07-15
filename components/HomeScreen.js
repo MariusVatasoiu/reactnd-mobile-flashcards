@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 import { connect } from "react-redux";
-import { handleInitialData } from "../actions";
+import { handleInitialData } from "../actions/decks";
 import { white } from "../utils/colors";
 
 class HomeScreen extends Component {
@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
   },
 });
 
-function mapStateToProps(state) {
+function mapStateToProps({ decks }) {
   return {
-    decks: Object.values(state),
+    decks: Object.values(decks),
   };
 }
 
