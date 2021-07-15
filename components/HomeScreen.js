@@ -11,17 +11,18 @@ import { connect } from "react-redux";
 import { white } from "../utils/colors";
 
 class HomeScreen extends Component {
-  onPress = () => {
+  onPress = (id) => {
     console.log("go to deck");
+    this.props.navigation.navigate("Deck", { id });
   };
 
   renderItem = ({ item }) => (
     <TouchableOpacity
       style={{ textAlign: "center", marginBottom: 20 }}
-      onPress={this.onPress}
+      onPress={() => this.onPress(item.id)}
     >
       <Text>{item.title}</Text>
-      <Text>{item.cards.length} cards</Text>
+      <Text>{Object.keys(item.cards).length} cards</Text>
     </TouchableOpacity>
   );
 

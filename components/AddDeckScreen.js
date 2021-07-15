@@ -13,7 +13,6 @@ class AddDeckScreen extends Component {
   };
 
   onSubmit = () => {
-    console.log("onSubmit");
     const { text } = this.state;
     const { dispatch } = this.props;
 
