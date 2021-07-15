@@ -73,7 +73,6 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({ decks }, { navigation }) {
-  console.log(decks);
   return {
     deck: decks[navigation.getParam("id")],
   };

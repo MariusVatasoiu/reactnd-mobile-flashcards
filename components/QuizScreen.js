@@ -14,7 +14,6 @@ class QuizScreen extends Component {
   };
 
   showAnswer = (id) => {
-    console.log("Show Answer", id);
     this.setState({ showAnswer: true });
   };
 
@@ -59,7 +58,6 @@ class QuizScreen extends Component {
   render() {
     const { currentCard, finished, score, showAnswer } = this.state;
     const { cards, navigation } = this.props;
-    console.log(navigation);
     if (cards.length === 0) {
       return (<View style={styles.container}>
         <Text style={{ fontSize: 16, textAlign: "center", paddingTop: 40 }}>

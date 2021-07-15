@@ -15,7 +15,6 @@ class HomeScreen extends Component {
     this.props.dispatch(handleInitialData());
   }
   onPress = (id) => {
-    console.log("go to deck");
     this.props.navigation.navigate("Deck", { id });
   };
 

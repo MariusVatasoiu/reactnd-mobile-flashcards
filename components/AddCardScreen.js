@@ -19,7 +19,6 @@ class AddCardScreen extends Component {
     const { dispatch, navigation } = this.props;
     const deckId = navigation.getParam("id");
 
-    console.log("Add", question, answer);
     dispatch(
       handleAddCard(
         deckId,

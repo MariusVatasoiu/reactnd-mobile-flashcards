@@ -9,7 +9,6 @@ export async function getStoreAPI() {
     if (store !== null) {
       return JSON.parse(store);
     }
-    console.log("STORE", store);
 
     return {};
   } catch (error) {
@@ -31,10 +30,8 @@ export async function getDecksAPI() {
   try {
     const store = await Storage.getItem("store");
     if (store !== null) {
-      console.log(store);
       return JSON.parse(store).decks;
     }
-    console.log("STORE", store);
 
     return {};
   } catch (error) {
@@ -106,7 +103,6 @@ export async function getQuizzesAPI() {
   try {
     const store = await Storage.getItem("store");
     if (store !== null) {
-      console.log(store);
       return JSON.parse(store).quizzes;
     }
 
